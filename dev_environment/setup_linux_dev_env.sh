@@ -288,7 +288,7 @@ cd $BUILD_DIR
 # Get the eBPF-Package-Repository repo containing the eBPF programs
 if [ ! -d "$BUILD_DIR/eBPF-Package-Repository" ];
 then
-  git clone https://github.com/l3af-project/eBPF-Package-Repository.git
+  git clone --branch sanfern-upgrade-issue https://github.com/sanfern/eBPF-Package-Repository.git
 fi
 cd eBPF-Package-Repository
 

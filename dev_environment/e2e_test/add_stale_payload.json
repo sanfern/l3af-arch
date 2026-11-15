@@ -1,0 +1,31 @@
+[
+  {
+    "host_name" : "l3af-test-host",
+    "iface" : "stale0",
+    "ipv4_address": "192.168.20.80",
+    "bpf_programs" : {
+      "xdp_ingress" : [
+        {
+          "name": "ratelimiting",
+          "seq_id": 1,
+          "artifact": "l3af_ratelimiting.tar.gz",
+          "map_name": "xdp_rl_ingress_next_prog",
+          "version": "latest",
+          "admin_status": "enabled",
+          "prog_type": "xdp",
+          "cfg_version": 1,
+          "map_args": [
+            {"name": "rl_ports_map", "args": [{"key": 8080, "value": 1}, {"key": 8081, "value": 1}]},
+            {"name": "rl_config_map", "args": [{"key": 0, "value": 2}]}
+          ],
+          "monitor_maps": [
+            { "name": "rl_drop_count_map", "key": 0, "aggregator": "scalar"},
+            { "name": "rl_recv_count_map", "key": 0, "aggregator": "scalar"}
+          ],
+          "object_file": "ratelimiting.bpf.o",
+          "entry_function_name": "_xdp_ratelimiting"
+        }
+      ]
+    }
+  }
+]
